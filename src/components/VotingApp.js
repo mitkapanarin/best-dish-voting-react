@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from "react";
+import pizza from './images/pizza.jpg'
+import burger from './images/burger.jpg'
+import pasta from './images/pasta.jpg'
+import Cards from "./Cards";
+import Tables from "./Tables";
 
 function VotingApp() {
   const [dishes, setDishes] = useState([
     {
       id: 1,
       name: "Pizza",
-      image: "./components/images/pizza.jpg",
+      image: pizza,
       likes: 0,
       dislikes: 0,
     },
     {
       id: 2,
       name: "Burger",
-      image: "./components/images/burger.jpg",
+      image: burger,
       likes: 0,
       dislikes: 0,
     },
     {
       id: 3,
       name: "Pasta",
-      image: "./components/images/pasta.jpg",
+      image: pasta,
       likes: 0,
       dislikes: 0,
     },
@@ -51,51 +56,9 @@ function VotingApp() {
     <div className="results">
       <h1>Vote for the Best Dish</h1>
       <div className="dishes">
-        {dishes.map((dish) => (
-          <div key={dish.id} className="dish">
-            <img src={dish.image} alt={dish.name} />
-            <div className="like-dislike">
-              <div className="like">
-                <button
-                  className="btn btn-success"
-                  onClick={() => handleLike(dish.id)}
-                >
-                  <i class="bi bi-hand-thumbs-up-fill"></i>
-                </button>
-                <span>{dish.likes}</span>
-              </div>
-              <div className="dislike">
-                <button
-                  className="btn btn-danger"
-                  onClick={() => handleDislike(dish.id)}
-                >
-                  <i class="bi bi-hand-thumbs-down-fill"></i>
-                </button>
-                <span>{dish.dislikes}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+        {dishes?.map((dish)=> <Cards {...dish} handleLike={handleLike} handleDislike={handleDislike}/>)}
       </div>
-      <h2>Votes</h2>
-      <table className="results-table">
-        <thead>
-          <tr>
-            <th>Dish</th>
-            <th>Likes</th>
-            <th>Dislikes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {dishes.map((dish) => (
-            <tr key={dish.id}>
-              <td>{dish.name}</td>
-              <td>{dish.likes}</td>
-              <td>{dish.dislikes}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <Tables dishes={dishes}/>
     </div>
   );
 }

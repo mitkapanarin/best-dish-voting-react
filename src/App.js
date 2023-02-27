@@ -3,7 +3,7 @@ import VotingApp from './components/VotingApp';
 
 function App() {
   return (
-    <div className="App">
+    <div className="App container">
       <VotingApp/>
     </div>
   );
